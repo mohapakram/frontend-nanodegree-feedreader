@@ -31,12 +31,13 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+         it("allFeeds should have a url" , function (){
+          allFeeds.forEach(function (feed){
+             expect(feed.url).toBeDefined();
+             expect(feed.url.lenght).not.toBe(0);
+          });
 
-
-        /* TODO: Write a test that loops through each feed
-         * in the allFeeds object and ensures it has a name defined
-         * and that the name is not empty.
-         */
+         });
     });
 
 
@@ -53,6 +54,12 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+
+      describe("the menu", function (){
+         it("elements should be hidden by default", function (){
+
+         });
+      });
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
