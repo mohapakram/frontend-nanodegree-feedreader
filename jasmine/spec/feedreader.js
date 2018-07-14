@@ -34,7 +34,17 @@ $(function() {
          it("allFeeds should have a url" , function (){
           allFeeds.forEach(function (feed){
              expect(feed.url).toBeDefined();
+             expect(feed.name).toBeDefined();
              expect(feed.url.lenght).not.toBe(0);
+             expect(feed.name.lenght).not.toBe(0);
+          });
+
+         });
+
+         it("allFeeds should have a name" , function (){
+          allFeeds.forEach(function (feed){
+             expect(feed.name).toBeDefined();
+             expect(feed.name.lenght).not.toBe(0);
           });
 
          });
@@ -69,15 +79,10 @@ $(function() {
          });
 
          it("should toggle when clicked", function(){
-          if(check){
             body.toggleClass('menu-hidden');
             check = body.hasClass("menu-hidden");
             expect(check).toBe(false);
-          }else{
             body.toggleClass('menu-hidden');
-            check = body.hasClass("menu-hidden");
-            expect(check).toBe(true);
-          }
          });
 
       });
@@ -113,6 +118,22 @@ $(function() {
          });
       });
       describe("New Feed Selection", function (){
-        // do not now how to make it xD
+          let feed1,
+              feed2;
+              beforeEach(function (done){
+                loadFeed(0 , function(){
+                  feed1 = $(".entry");
+                  done();
+                });
+                loadFeed(1, function(){
+                  feed2 = $(".entry");
+                  done();
+                });
+              });
+              it("different feeds", function (done){
+                 expect(feed1).not.toBe(feed2);
+                 done();
+              });
+
       });
 }());
