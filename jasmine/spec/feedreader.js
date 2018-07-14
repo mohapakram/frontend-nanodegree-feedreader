@@ -56,9 +56,30 @@ $(function() {
           */
 
       describe("the menu", function (){
-         it("elements should be hidden by default", function (){
+            let body,
+                check;
 
+            beforeEach(function (){
+             body = $("body");
+             check = body.hasClass("menu-hidden");
+            });
+
+         it("menu elements should be hidden by default", function (){
+            expect(check).toBe(true);
          });
+
+         it("should toggle when clicked", function(){
+          if(check){
+            body.toggleClass('menu-hidden');
+            check = body.hasClass("menu-hidden");
+            expect(check).toBe(false);
+          }else{
+            body.toggleClass('menu-hidden');
+            check = body.hasClass("menu-hidden");
+            expect(check).toBe(true);
+          }
+         });
+
       });
 
     /* TODO: Write a new test suite named "Initial Entries" */
@@ -76,4 +97,13 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+      describe("Initial Entries", function (){
+         it("loadFeed function is called and completes its work" , function (){
+              loadFeed(0);
+              let feed = $(".feed");
+              let entry = $(".entry");
+              let check = feed.children(".entry");
+              console.log(check);
+         });
+      });
 }());
