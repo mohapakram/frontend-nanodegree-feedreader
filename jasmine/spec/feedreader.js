@@ -98,12 +98,21 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
       describe("Initial Entries", function (){
-         it("loadFeed function is called and completes its work" , function (){
-              loadFeed(0);
-              let feed = $(".feed");
-              let entry = $(".entry");
-              let check = feed.children(".entry");
-              console.log(check);
+        let feed,
+            childNumber;
+        beforeEach(function (done){
+            loadFeed(0 , function (){
+              done();
+            });
+        });
+         it("loadFeed function is called and completes its work" , function (done){
+             feed = $(".feed");
+             childNumber = feed.children().length;
+              expect(childNumber).not.toBe(0);
+              done();
          });
+      });
+      describe("New Feed Selection", function (){
+        // do not now how to make it xD
       });
 }());
