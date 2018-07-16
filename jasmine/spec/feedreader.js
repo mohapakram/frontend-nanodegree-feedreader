@@ -34,9 +34,7 @@ $(function() {
          it("allFeeds should have a url" , function (){
           allFeeds.forEach(function (feed){
              expect(feed.url).toBeDefined();
-             expect(feed.name).toBeDefined();
              expect(feed.url.lenght).not.toBe(0);
-             expect(feed.name.lenght).not.toBe(0);
           });
 
          });
@@ -79,11 +77,13 @@ $(function() {
          });
 
          it("should toggle when clicked", function(){
-            body.toggleClass('menu-hidden');
-            check = body.hasClass("menu-hidden");
-            expect(check).toBe(false);
-            body.toggleClass('menu-hidden');
-         });
+           $('.menu-icon-link').click();
+          expect($('body').hasClass('menu-hidden')).toBe(false); //the menu disply when clicked
+
+              // Click again
+          $('.menu-icon-link').click();
+           expect($('body').hasClass('menu-hidden')).toBe(true); //the menu hide when it'sclicked again
+                 });
 
       });
 
@@ -95,38 +95,38 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-
+         describe("Initial Entries", function (){
+           let feed,
+               childNumber;
+           beforeEach(function (done){
+               loadFeed(0 , function (){
+                 done();
+               });
+           });
+            it("loadFeed function is called and completes its work" , function (done){
+                feed = $(".feed");
+                childNumber = feed.children().length;
+                 expect(childNumber).not.toBe(0);
+                 done();
+            });
+         });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-      describe("Initial Entries", function (){
-        let feed,
-            childNumber;
-        beforeEach(function (done){
-            loadFeed(0 , function (){
-              done();
-            });
-        });
-         it("loadFeed function is called and completes its work" , function (done){
-             feed = $(".feed");
-             childNumber = feed.children().length;
-              expect(childNumber).not.toBe(0);
-              done();
-         });
-      });
+
       describe("New Feed Selection", function (){
           let feed1,
               feed2;
               beforeEach(function (done){
                 loadFeed(0 , function(){
-                  feed1 = $(".entry");
+                  feed1 = $(".feed").html();
                   done();
                 });
                 loadFeed(1, function(){
-                  feed2 = $(".entry");
+                  feed2 =  $(".feed").html();
                   done();
                 });
               });
